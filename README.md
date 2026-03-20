@@ -2,7 +2,7 @@
 
 Landing page de alta conversão para a **MS Elétrica & Tech**, empresa especializada em automação residencial e projetos elétricos de alto padrão na região do Vetor Norte de Belo Horizonte (Lagoa Santa, Vespasiano, Confins e região).
 
-🔗 **[Acesse o site ao vivo](https://seuuser.github.io/ms-eletrica/)**
+🔗 **[Acesse o site ao vivo](mbraga23.github.io/ms-eletrica/)**
 
 ---
 
