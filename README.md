@@ -1,67 +1,89 @@
-# ⚡ MS Elétrica & Tech — Landing Page
+# MS Elétrica & Tech — site institucional
 
-Landing page de alta conversão para a **MS Elétrica & Tech**, empresa especializada em automação residencial e projetos elétricos de alto padrão na região do Vetor Norte de Belo Horizonte (Lagoa Santa, Vespasiano, Confins e região).
+Site oficial da **MS Elétrica & Tech**, com foco em serviços elétricos residenciais, reparos, instalações e manutenção.
 
-🔗 **[Acesse o site ao vivo](https://mbraga23.github.io/ms-eletrica/)**
+🔗 **[Acessar o site](https://mseletricaetech.com.br/)**
 
----
+## Posicionamento
 
-## 🏠 Sobre o Projeto
+A página apresenta a MS Elétrica & Tech como uma opção de atendimento elétrico residencial próximo, transparente e cuidadoso. Lagoa Santa é a área principal, com possibilidade de atendimento em Vespasiano, Confins e cidades próximas, mediante consulta.
 
-Página institucional focada em conversão via WhatsApp, desenvolvida para atrair proprietários de imóveis de alto padrão e arquitetos que buscam parceiros técnicos confiáveis para execução de projetos elétricos e automação residencial.
+O contato é direcionado para o WhatsApp, onde o cliente pode informar a cidade, o bairro e enviar fotos ou vídeos do problema antes do agendamento.
 
-### Serviços apresentados
+## Serviços apresentados
 
-- **Automação de Iluminação** — Cenários inteligentes via Zigbee, Alexa e Google Home
-- **Fechaduras Digitais & Segurança** — Biometria, controle remoto e alertas em tempo real
-- **Quadros Elétricos Inteligentes** — Montagem dentro da NBR 5410, acabamento profissional
-- **Integração Total** — Iluminação, som, climatização e segurança em um único sistema
+- Instalação e troca de chuveiros elétricos
+- Tomadas e interruptores
+- Luminárias e iluminação
+- Ventiladores de teto
+- Disjuntores e quadros elétricos
+- Identificação de defeitos elétricos
+- Novos circuitos
+- Manutenção preventiva
+- Automação residencial simples como serviço complementar
 
----
+## Sobre o profissional
 
-## 🛠️ Tecnologias
+O atendimento é realizado por Marcelo, responsável pela MS Elétrica & Tech.
 
-| Frontend | Design |
-|----------|--------|
-| HTML5 semântico | Dark theme + Gold accents |
-| CSS3 (variáveis, grid, flexbox) | Tipografia: Cormorant Garamond + DM Sans |
-| JavaScript vanilla | Scroll reveal animations |
-| Responsivo (mobile-first) | Grain texture overlay |
+- Curso de Elétrica Predial concluído pelo SENAI
+- Cerca de dois anos de experiência prática em serviços elétricos
+- Curso Técnico em Eletrotécnica em andamento pelo SENAI
 
-**Zero dependências externas.** Nenhum framework, nenhum build step — abre o `index.html` e funciona.
+## Tecnologia
 
----
+- HTML5 semântico
+- CSS responsivo
+- JavaScript sem frameworks
+- Botões de contato pelo WhatsApp
+- Navegação adaptada para celular
+- Animações com respeito à preferência de redução de movimento
 
-## 📁 Estrutura
+## Busca e presença local
 
+O projeto contém:
+
+- Título e descrição voltados para buscas locais
+- Endereço canônico no domínio oficial
+- Dados estruturados `Electrician` em JSON-LD
+- Áreas atendidas informadas nos dados estruturados
+- Metadados Open Graph e Twitter Card
+- `robots.txt` liberando o rastreamento
+- `sitemap.xml` com a página oficial
+- `CNAME` para o domínio personalizado
+
+## Estrutura do repositório
+
+```text
+├── index.html
+├── robots.txt
+├── sitemap.xml
+├── CNAME
+├── README.md
+└── img/
+    ├── logo.webp
+    ├── autoridade.webp
+    ├── panel.webp
+    ├── automation.webp
+    ├── smartlock.webp
+    └── hero.webp
 ```
-├── index.html       # Página principal (single-file)
-├── img/
-│   ├── hero.webp        # Mansão — hero background
-│   ├── automation.webp  # Sala com painel de automação
-│   ├── smartlock.webp   # Fechadura digital
-│   ├── panel.webp       # Quadro elétrico inteligente
-│   └── logo.webp        # Logo MS Elétrica & Tech
-└── README.md
-```
 
----
+## Publicação
 
-## 🚀 Deploy
+O site é publicado pelo GitHub Pages no domínio personalizado `mseletricaetech.com.br`.
 
-Hospedado via **GitHub Pages**. Para rodar localmente, basta abrir o `index.html` em qualquer navegador.
+Após alterações importantes no conteúdo:
 
----
+1. Atualize a data `lastmod` do `sitemap.xml`.
+2. Publique os arquivos no GitHub.
+3. Confirme o sitemap no Google Search Console.
+4. Solicite nova indexação da página inicial quando necessário.
 
-## 📞 Contato
+## Contato
 
 - **WhatsApp:** [(31) 98257-3307](https://wa.me/5531982573307)
 - **Instagram:** [@marceloseletrica](https://instagram.com/marceloseletrica)
-- **Região de atendimento:** Lagoa Santa, Vespasiano, Santa Luzia, Confins e Vetor Norte BH
+- **Área principal:** Lagoa Santa, MG
+- **Outras áreas:** Vespasiano, Confins e cidades próximas, mediante consulta
 
----
-
-<p align="center">
-  <strong>MS Elétrica & Tech</strong> — Sua mansão merece uma inteligência à altura.<br>
-  <sub>© 2026 Todos os direitos reservados.</sub>
-</p>
