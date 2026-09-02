@@ -30,6 +30,15 @@
   <meta name="twitter:description" content="Reparos, instalações e manutenção elétrica residencial em Lagoa Santa e cidades próximas.">
   <meta name="twitter:image" content="https://mseletricaetech.com.br/img/autoridade.webp">
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17634662738"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17634662738');
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -521,6 +530,19 @@
   <a class="float-wa" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Vim%20pelo%20site.%20Tenho%20um%20problema%20el%C3%A9trico.%20Posso%20enviar%20uma%20foto%20e%20informar%20minha%20cidade%3F" target="_blank" rel="noopener" aria-label="Falar com a MS Elétrica & Tech no WhatsApp">●</a>
 
   <script>
+    function gtag_report_conversion() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-17634662738/ozZCCO7E2ewcENKy7thB'
+        });
+      }
+      return true;
+    }
+
+    document.querySelectorAll('a[href*="wa.me/"]').forEach((link) => {
+      link.addEventListener('click', gtag_report_conversion);
+    });
+
     const menuButton = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
