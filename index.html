@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#0b1f33">
 
   <title>Eletricista residencial em Lagoa Santa | MS Elétrica & Tech</title>
-  <meta name="description" content="Eletricista residencial em Lagoa Santa para chuveiros, tomadas, iluminação, disjuntores e carregadores veiculares. Fale direto com Marcelo pelo WhatsApp e combine o valor antes do serviço.">
-  <meta name="keywords" content="eletricista Lagoa Santa, eletricista Vespasiano, eletricista Confins, eletricista residencial, instalação de carregador veicular, wallbox Lagoa Santa, troca de chuveiro, instalação de tomada, luminária, ventilador de teto, quadro elétrico">
+  <meta name="description" content="Instalação elétrica residencial em Lagoa Santa para casas novas, reformas e reparos. Tomadas, iluminação, quadros, chuveiros e wallbox. Orçamento pelo WhatsApp.">
+  <meta name="keywords" content="eletricista Lagoa Santa, instalação elétrica casa nova, instalação elétrica residencial completa, eletricista para obra, reforma elétrica residencial, eletricista Vespasiano, eletricista Confins, instalação de carregador veicular, wallbox Lagoa Santa, troca de chuveiro, instalação de tomada, luminária, ventilador de teto, quadro elétrico">
   <meta name="author" content="MS Elétrica & Tech">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://mseletricaetech.com.br/">
@@ -18,7 +18,7 @@
   <meta name="ICBM" content="-19.6285, -43.8953">
 
   <meta property="og:title" content="Eletricista residencial em Lagoa Santa | MS Elétrica & Tech">
-  <meta property="og:description" content="Reparos, instalações, manutenção elétrica e carregadores veiculares em Lagoa Santa, Vespasiano, Confins e cidades próximas.">
+  <meta property="og:description" content="Instalações elétricas em casas novas e reformas, reparos, manutenção e carregadores veiculares em Lagoa Santa e região.">
   <meta property="og:image" content="https://mseletricaetech.com.br/img/autoridade.webp">
   <meta property="og:url" content="https://mseletricaetech.com.br/">
   <meta property="og:type" content="website">
@@ -27,7 +27,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Eletricista residencial em Lagoa Santa | MS Elétrica & Tech">
-  <meta name="twitter:description" content="Reparos, instalações e manutenção elétrica residencial em Lagoa Santa e cidades próximas.">
+  <meta name="twitter:description" content="Instalações elétricas em casas novas e reformas, reparos e manutenção em Lagoa Santa e cidades próximas.">
   <meta name="twitter:image" content="https://mseletricaetech.com.br/img/autoridade.webp">
 
   <!-- Google tag (gtag.js) -->
@@ -44,7 +44,7 @@
     "@context": "https://schema.org",
     "@type": "Electrician",
     "name": "MS Elétrica & Tech",
-    "description": "Serviços elétricos residenciais, reparos, instalações, manutenção e carregadores veiculares em Lagoa Santa, Vespasiano, Confins e cidades próximas.",
+    "description": "Instalações elétricas em casas novas e reformas, reparos, manutenção e carregadores veiculares em Lagoa Santa, Vespasiano, Confins e cidades próximas.",
     "url": "https://mseletricaetech.com.br/",
     "telephone": "+55-31-98257-3307",
     "image": "https://mseletricaetech.com.br/img/autoridade.webp",
@@ -82,6 +82,7 @@
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Instalação de luminárias e ventiladores"}},
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Manutenção de quadros e disjuntores"}},
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Identificação de defeitos elétricos"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Instalação elétrica de casas novas e reformas"}},
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Instalação de carregadores para veículos elétricos"}}
       ]
     }
@@ -231,6 +232,19 @@
     .service-footer p { margin: 0; max-width: 730px; color: #c8d2da; font-size: .9rem; }
     .service-footer strong { color: var(--white); }
 
+    .new-installation { background: var(--paper); }
+    .new-installation-card { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 70px); align-items: stretch; padding: clamp(30px, 5vw, 66px); border-radius: var(--radius); color: var(--white); background: linear-gradient(135deg, var(--ink) 0%, #123f61 100%); box-shadow: var(--shadow); }
+    .new-installation-card .section-kicker { color: #9dc8e7; }
+    .new-installation-card .section-title { color: var(--white); }
+    .new-installation-copy > p { max-width: 650px; margin: 22px 0 0; color: #c9deed; font-size: 1rem; }
+    .new-installation-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 14px; margin-top: 26px; }
+    .new-installation-list span { padding: 11px 13px; border: 1px solid rgba(255,255,255,.13); border-radius: 12px; color: #e2edf4; background: rgba(255,255,255,.06); font-size: .84rem; font-weight: 700; }
+    .new-installation-card .button { margin-top: 28px; }
+    .new-installation-side { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: 26px; border: 1px solid rgba(255,255,255,.14); border-radius: 18px; background: rgba(255,255,255,.07); }
+    .new-installation-side strong { color: var(--amber); font-size: 1.1rem; }
+    .new-installation-side p { margin: 0; color: #c9deed; font-size: .9rem; }
+    .new-installation-emphasis { display: inline-flex; align-self: flex-start; padding: 8px 11px; border-radius: 999px; color: var(--ink); background: var(--amber); font-size: .76rem; font-weight: 800; }
+
     .installations { background: linear-gradient(180deg, #eef5f8 0%, var(--paper) 100%); }
     .installations-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 36px; }
     .installations-head .section-lead { max-width: 540px; margin: 0; }
@@ -323,7 +337,7 @@
       .nav-links { position: fixed; inset: 76px 0 auto 0; display: none; padding: 24px 20px 28px; border-bottom: 1px solid var(--line); background: var(--paper); box-shadow: 0 20px 30px rgba(11,31,51,.1); }
       .nav-links.open { display: grid; }
       .nav-links .button { width: 100%; margin-top: 5px; }
-      .hero-grid, .how-grid, .about-grid, .automation-card, .faq-wrap, .cta-inner { grid-template-columns: 1fr; }
+      .hero-grid, .how-grid, .about-grid, .automation-card, .new-installation-card, .faq-wrap, .cta-inner { grid-template-columns: 1fr; }
       .hero-photo { width: min(580px, calc(100% - 24px)); margin: 10px auto 0; }
       .photo-card { left: -18px; }
       .trust-grid { grid-template-columns: repeat(2, 1fr); }
@@ -352,8 +366,10 @@
       .trust-item:last-child { border-bottom: 0; }
       .service-grid { grid-template-columns: 1fr; }
       .service-card { min-height: 230px; }
+      .new-installation-list { grid-template-columns: 1fr; }
       .service-footer { display: grid; }
       .service-footer .button { width: 100%; }
+      .new-installation-card .button { width: 100%; }
       .installation-grid { grid-template-columns: 1fr; }
       .installation-note { display: grid; }
       .installation-note .button { width: 100%; }
@@ -374,6 +390,7 @@
       <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
       <div class="nav-links">
         <a href="#servicos">Serviços</a>
+        <a href="#instalacao-nova">Obras e reformas</a>
         <a href="#carregadores">Carregador veicular</a>
         <a href="#como-funciona">Como funciona</a>
         <a href="#sobre">Sobre</a>
@@ -387,9 +404,9 @@
     <section class="hero" id="inicio">
       <div class="hero-grid container">
         <div class="hero-content reveal">
-          <div class="eyebrow">Instalações e reparos residenciais</div>
+          <div class="eyebrow">Instalações, reformas e reparos residenciais</div>
           <h1>Eletricista em <span>Lagoa Santa.</span></h1>
-          <p class="hero-copy">Instalação e reparo de chuveiros, tomadas, iluminação, disjuntores e carregadores veiculares. <strong>Fale direto com Marcelo pelo WhatsApp</strong>, explique o problema e informe seu bairro. Se puder, envie uma foto.</p>
+          <p class="hero-copy">Do primeiro ponto ao reparo: faço instalações elétricas em casas novas e reformas, além de chuveiros, tomadas, iluminação, disjuntores e carregadores veiculares. <strong>Fale direto com Marcelo pelo WhatsApp</strong>, explique o que precisa e informe seu bairro.</p>
           <div class="hero-actions">
             <a class="button button-whatsapp" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Vim%20pelo%20site.%20Tenho%20um%20problema%20el%C3%A9trico.%20Posso%20enviar%20uma%20foto%20e%20informar%20minha%20cidade%3F" target="_blank" rel="noopener"><span class="wa-dot">●</span> Pedir orçamento no WhatsApp</a>
             <a class="button button-secondary" href="#servicos">Ver serviços</a>
@@ -422,7 +439,7 @@
             <span class="section-kicker">Serviços</span>
             <h2 class="section-title">O que posso resolver na sua casa</h2>
           </div>
-          <p class="section-lead">Do reparo rápido à organização do quadro elétrico, com explicação simples sobre o problema e a solução indicada.</p>
+          <p class="section-lead">Da elétrica completa de uma casa nova ao reparo rápido, com explicação simples sobre o que será feito e a solução indicada.</p>
         </div>
         <div class="service-grid">
           <article class="service-card reveal"><span class="service-number">01</span><h3>Chuveiros elétricos</h3><p>Instalação, troca, verificação de aquecimento e análise do circuito.</p></article>
@@ -431,14 +448,39 @@
           <article class="service-card reveal"><span class="service-number">04</span><h3>Ventiladores de teto</h3><p>Instalação, substituição e verificação da ligação elétrica do equipamento.</p></article>
           <article class="service-card reveal"><span class="service-number">05</span><h3>Disjuntores e quadros</h3><p>Troca de componentes, identificação de circuitos e organização do quadro.</p></article>
           <article class="service-card reveal"><span class="service-number">06</span><h3>Defeitos elétricos</h3><p>Investigação de quedas de energia, curto-circuito, cheiro de queimado e falhas.</p></article>
-          <article class="service-card reveal"><span class="service-number">07</span><h3>Novos circuitos</h3><p>Adequação para equipamentos que exigem alimentação elétrica dedicada.</p></article>
-          <article class="service-card reveal"><span class="service-number">08</span><h3>Manutenção preventiva</h3><p>Verificação de pontos de aquecimento, conexões frouxas e sinais de desgaste.</p></article>
-          <article class="service-card reveal"><span class="service-number">09</span><h3>Automação residencial</h3><p>Soluções simples de iluminação e controle como serviço complementar.</p><a href="#automacao">Conhecer soluções de automação</a></article>
-          <article class="service-card reveal"><span class="service-number">10</span><h3>Carregadores veiculares</h3><p>Instalação de wallbox, proteção elétrica e circuito adequado para o carregamento em casa.</p><a href="#carregadores">Ver instalação realizada</a></article>
+          <article class="service-card reveal"><span class="service-number">07</span><h3>Elétrica de casas novas</h3><p>Levantamento de pontos, circuitos, quadro, tomadas e iluminação para obras e reformas.</p><a href="#instalacao-nova">Ver como funciona</a></article>
+          <article class="service-card reveal"><span class="service-number">08</span><h3>Novos circuitos</h3><p>Adequação para equipamentos que exigem alimentação elétrica dedicada.</p></article>
+          <article class="service-card reveal"><span class="service-number">09</span><h3>Manutenção preventiva</h3><p>Verificação de pontos de aquecimento, conexões frouxas e sinais de desgaste.</p></article>
+          <article class="service-card reveal"><span class="service-number">10</span><h3>Automação residencial</h3><p>Soluções simples de iluminação e controle como serviço complementar.</p><a href="#automacao">Conhecer soluções de automação</a></article>
+          <article class="service-card reveal"><span class="service-number">11</span><h3>Carregadores veiculares</h3><p>Instalação de wallbox, proteção elétrica e circuito adequado para o carregamento em casa.</p><a href="#carregadores">Ver instalação realizada</a></article>
         </div>
         <div class="service-footer reveal">
           <p><strong>Não encontrou o seu problema na lista?</strong> Conte o que está acontecendo pelo WhatsApp. Se estiver dentro do meu atendimento, combinamos os próximos passos.</p>
           <a class="button button-whatsapp" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Meu%20problema%20n%C3%A3o%20est%C3%A1%20na%20lista%20do%20site.%20Posso%20enviar%20uma%20foto%3F" target="_blank" rel="noopener"><span class="wa-dot">●</span> Consultar serviço</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="new-installation section" id="instalacao-nova">
+      <div class="container">
+        <div class="new-installation-card reveal">
+          <div class="new-installation-copy">
+            <span class="section-kicker">Casa nova ou reforma</span>
+            <h2 class="section-title">Elétrica planejada desde o início</h2>
+            <p>Vai construir ou reformar sua casa em Lagoa Santa? Posso conversar sobre a planta ou o croqui, levantar os pontos e organizar a execução da instalação elétrica conforme o que a obra precisa.</p>
+            <div class="new-installation-list">
+              <span>Pontos de tomadas e iluminação</span>
+              <span>Circuitos e proteções</span>
+              <span>Quadro elétrico organizado</span>
+              <span>Adequações em reformas</span>
+            </div>
+            <a class="button button-whatsapp" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Quero%20um%20or%C3%A7amento%20para%20a%20instala%C3%A7%C3%A3o%20el%C3%A9trica%20da%20minha%20casa%20nova%20ou%20reforma." target="_blank" rel="noopener"><span class="wa-dot">●</span> Pedir orçamento da obra</a>
+          </div>
+          <aside class="new-installation-side">
+            <strong>Como começamos</strong>
+            <p>Envie a cidade, o estágio da obra e, se tiver, a planta, o croqui ou fotos do local. Assim eu avalio o escopo antes de combinar visita e valor.</p>
+            <span class="new-installation-emphasis">Lagoa Santa e região</span>
+          </aside>
         </div>
       </div>
     </section>
@@ -544,6 +586,10 @@
             <div class="faq-answer"><div><p>Lagoa Santa é a área principal. Também avalio atendimentos em Vespasiano, Confins e cidades próximas. Informe seu bairro e sua cidade no primeiro contato para eu confirmar a disponibilidade e o deslocamento.</p></div></div>
           </div>
           <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">Você faz instalação elétrica completa?<span>+</span></button>
+            <div class="faq-answer"><div><p>Sim. Em casas novas e reformas, converso sobre os pontos, circuitos, proteções, quadro, tomadas e iluminação necessários. Envie a cidade e, se tiver, uma planta, croqui ou fotos para eu avaliar o escopo antes de combinar o serviço.</p></div></div>
+          </div>
+          <div class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false">É possível avaliar o problema por foto?<span>+</span></button>
             <div class="faq-answer"><div><p>A foto ou o vídeo ajudam a entender a situação e preparar o atendimento, mas alguns defeitos só podem ser identificados com medições e verificação presencial.</p></div></div>
           </div>
@@ -566,8 +612,8 @@
     <section class="cta" id="contato">
       <div class="cta-inner container reveal">
         <div>
-          <h2>Tem um problema elétrico em casa?</h2>
-          <p>Conte o que está acontecendo pelo WhatsApp e informe seu bairro. Fotos ajudam, mas você pode começar só com uma mensagem.</p>
+          <h2>Vai construir, reformar ou tem um problema elétrico?</h2>
+          <p>Conte o que você precisa pelo WhatsApp e informe seu bairro. Fotos, croquis ou plantas ajudam, mas você pode começar só com uma mensagem.</p>
         </div>
         <a class="button button-whatsapp" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Vim%20pelo%20site.%20Tenho%20um%20problema%20el%C3%A9trico.%20Posso%20enviar%20uma%20foto%20e%20informar%20minha%20cidade%3F" target="_blank" rel="noopener"><span class="wa-dot">●</span> Falar com Marcelo</a>
       </div>
