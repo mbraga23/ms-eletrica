@@ -30,13 +30,14 @@
   <meta name="twitter:description" content="Instalações elétricas em casas novas e reformas, reparos e manutenção em Lagoa Santa e cidades próximas.">
   <meta name="twitter:image" content="https://mseletricaetech.com.br/img/autoridade.webp">
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (Google Ads + Google Analytics 4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17634662738"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-17634662738');
+    gtag('config', 'G-BWRLT4XG1J');
   </script>
 
   <script type="application/ld+json">
@@ -639,6 +640,9 @@
   <script>
     function gtag_report_conversion() {
       if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          'method': 'whatsapp'
+        });
         gtag('event', 'conversion', {
           'send_to': 'AW-17634662738/ozZCCO7E2ewcENKy7thB'
         });
