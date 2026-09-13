@@ -85,7 +85,8 @@
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Manutenção de quadros e disjuntores"}},
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Identificação de defeitos elétricos"}},
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Instalação elétrica de casas novas e reformas"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Instalação de carregadores para veículos elétricos"}}
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Instalação de carregadores para veículos elétricos", "url": "https://mseletricaetech.com.br/wallbox/"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automação residencial", "url": "https://mseletricaetech.com.br/automacao/"}}
       ]
     }
   }
@@ -185,8 +186,8 @@
     .brand img { width: 42px; height: 42px; border-radius: 11px; object-fit: cover; background: var(--ink); }
     .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
     .brand-text small { margin-top: 4px; color: var(--muted); font-size: .66rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-    .nav-links { display: flex; align-items: center; gap: 27px; }
-    .nav-links > a:not(.button) { color: var(--ink-soft); text-decoration: none; font-size: .88rem; font-weight: 700; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links > a:not(.button) { color: var(--ink-soft); text-decoration: none; font-size: .86rem; font-weight: 700; }
     .nav-links > a:not(.button):hover { color: var(--blue); }
     .nav .button { min-height: 44px; padding: 10px 17px; font-size: .84rem; }
     .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: var(--white); font-size: 1.3rem; cursor: pointer; }
@@ -261,6 +262,7 @@
     .installation-note { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 24px; padding: 22px 24px; border: 1px solid #cadce8; border-radius: 18px; background: rgba(255,255,255,.78); }
     .installation-note p { margin: 0; max-width: 730px; color: var(--muted); font-size: .9rem; }
     .installation-note strong { color: var(--ink); }
+    .installation-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; flex: 0 0 auto; }
 
     .how { background: var(--paper); }
     .how-grid { display: grid; grid-template-columns: .88fr 1.12fr; align-items: center; gap: clamp(44px, 8vw, 96px); }
@@ -295,6 +297,7 @@
     .automation-copy p { color: var(--muted); }
     .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
     .tag { padding: 8px 11px; border-radius: 999px; color: var(--blue); background: var(--blue-light); font-size: .75rem; font-weight: 800; }
+    .automation-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 
     .faq { background: var(--paper); }
     .faq-wrap { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(38px, 7vw, 82px); }
@@ -320,7 +323,7 @@
     .footer-brand img { width: 38px; height: 38px; border-radius: 10px; }
     .footer strong { display: block; color: var(--white); font-size: .85rem; }
     .footer small { display: block; margin-top: 3px; font-size: .72rem; }
-    .footer-links { display: flex; gap: 20px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
     .footer a { color: #c9d3db; text-decoration: none; font-size: .8rem; font-weight: 700; }
 
     .float-wa { position: fixed; right: 20px; bottom: 20px; z-index: 90; display: grid; place-items: center; width: 58px; height: 58px; border: 3px solid var(--white); border-radius: 50%; color: var(--white); background: var(--green); box-shadow: 0 12px 30px rgba(11,31,51,.24); text-decoration: none; font-size: 1.35rem; font-weight: 800; transition: transform .2s ease; }
@@ -374,8 +377,11 @@
       .new-installation-card .button { width: 100%; }
       .installation-grid { grid-template-columns: 1fr; }
       .installation-note { display: grid; }
-      .installation-note .button { width: 100%; }
+      .installation-actions { display: grid; justify-content: stretch; }
+      .installation-actions .button { width: 100%; }
       .automation-card img { min-height: 290px; }
+      .automation-actions { display: grid; }
+      .automation-actions .button { width: 100%; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
       .float-wa { right: 14px; bottom: 14px; width: 54px; height: 54px; }
     }
@@ -393,8 +399,8 @@
       <div class="nav-links">
         <a href="#servicos">Serviços</a>
         <a href="#instalacao-nova">Obras e reformas</a>
-        <a href="#carregadores">Carregador veicular</a>
-        <a href="#como-funciona">Como funciona</a>
+        <a href="/wallbox/">Wallbox</a>
+        <a href="/automacao/">Automação</a>
         <a href="#sobre">Sobre</a>
         <a href="#duvidas">Dúvidas</a>
         <a class="button button-whatsapp" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Vim%20pelo%20site.%20Tenho%20um%20problema%20el%C3%A9trico.%20Posso%20enviar%20uma%20foto%20e%20informar%20minha%20cidade%3F" target="_blank" rel="noopener"><span class="wa-dot">●</span> Falar no WhatsApp</a>
@@ -453,8 +459,8 @@
           <article class="service-card reveal"><span class="service-number">07</span><h3>Elétrica de casas novas</h3><p>Levantamento de pontos, circuitos, quadro, tomadas e iluminação para obras e reformas.</p><a href="#instalacao-nova">Ver como funciona</a></article>
           <article class="service-card reveal"><span class="service-number">08</span><h3>Novos circuitos</h3><p>Adequação para equipamentos que exigem alimentação elétrica dedicada.</p></article>
           <article class="service-card reveal"><span class="service-number">09</span><h3>Manutenção preventiva</h3><p>Verificação de pontos de aquecimento, conexões frouxas e sinais de desgaste.</p></article>
-          <article class="service-card reveal"><span class="service-number">10</span><h3>Automação residencial</h3><p>Soluções simples de iluminação e controle como serviço complementar.</p><a href="#automacao">Conhecer soluções de automação</a></article>
-          <article class="service-card reveal"><span class="service-number">11</span><h3>Carregadores veiculares</h3><p>Instalação de wallbox, proteção elétrica e circuito adequado para o carregamento em casa.</p><a href="#carregadores">Ver instalação realizada</a></article>
+          <article class="service-card reveal"><span class="service-number">10</span><h3>Automação residencial</h3><p>Soluções simples de iluminação, sensores, rotinas e controle como serviço complementar.</p><a href="/automacao/">Conhecer automação residencial</a></article>
+          <article class="service-card reveal"><span class="service-number">11</span><h3>Carregadores veiculares</h3><p>Instalação de wallbox, proteção elétrica e circuito adequado para o carregamento em casa.</p><a href="/wallbox/">Conhecer instalação de Wallbox</a></article>
         </div>
         <div class="service-footer reveal">
           <p><strong>Não encontrou o seu problema na lista?</strong> Conte o que está acontecendo pelo WhatsApp. Se estiver dentro do meu atendimento, combinamos os próximos passos.</p>
@@ -517,8 +523,11 @@
           </figure>
         </div>
         <div class="installation-note reveal">
-          <p><strong>Quer instalar um carregador em casa?</strong> Envie uma foto do local e informe o modelo do veículo ou do carregador para eu entender o que será necessário.</p>
-          <a class="button button-whatsapp" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Quero%20instalar%20um%20carregador%20veicular%20em%20casa.%20Posso%20enviar%20uma%20foto%20do%20local%3F" target="_blank" rel="noopener"><span class="wa-dot">●</span> Falar sobre wallbox</a>
+          <p><strong>Quer instalar um carregador em casa?</strong> Veja todos os detalhes do serviço de Wallbox ou envie uma foto do local e o modelo do veículo/carregador pelo WhatsApp.</p>
+          <div class="installation-actions">
+            <a class="button button-secondary" href="/wallbox/">Ver serviço de Wallbox</a>
+            <a class="button button-whatsapp" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Quero%20instalar%20um%20carregador%20veicular%20em%20casa.%20Posso%20enviar%20uma%20foto%20do%20local%3F" target="_blank" rel="noopener"><span class="wa-dot">●</span> Falar sobre wallbox</a>
+          </div>
         </div>
       </div>
     </section>
@@ -569,7 +578,10 @@
             <h2 class="section-title">Quer dar o primeiro passo na automação?</h2>
             <p>Além da elétrica residencial, também avalio soluções simples de automação para iluminação e controle. A proposta é começar pelo que realmente será útil para a sua rotina, sem transformar a casa em um conjunto de aplicativos difíceis de usar.</p>
             <div class="tag-list"><span class="tag">Iluminação</span><span class="tag">Controle por voz</span><span class="tag">Sensores</span><span class="tag">Rotinas simples</span></div>
-            <a class="button button-secondary" style="margin-top:26px" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20avaliar%20uma%20automa%C3%A7%C3%A3o%20simples%20na%20minha%20casa." target="_blank" rel="noopener">Conversar sobre automação</a>
+            <div class="automation-actions">
+              <a class="button button-secondary" href="/automacao/">Conhecer automação residencial</a>
+              <a class="button button-whatsapp" href="https://wa.me/5531982573307?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20avaliar%20uma%20automa%C3%A7%C3%A3o%20simples%20na%20minha%20casa." target="_blank" rel="noopener"><span class="wa-dot">●</span> Conversar sobre automação</a>
+            </div>
           </div>
         </div>
       </div>
@@ -629,6 +641,8 @@
         <div><strong>MS Elétrica & Tech</strong><small>Eletricista residencial em Lagoa Santa e região</small></div>
       </div>
       <div class="footer-links">
+        <a href="/wallbox/">Wallbox</a>
+        <a href="/automacao/">Automação residencial</a>
         <a href="tel:+5531982573307">(31) 98257-3307</a>
         <a href="https://instagram.com/marceloseletrica" target="_blank" rel="noopener">Instagram</a>
       </div>
@@ -706,4 +720,3 @@
   </script>
 </body>
 </html>
-
