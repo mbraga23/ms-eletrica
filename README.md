@@ -83,7 +83,7 @@ Após alterações importantes no conteúdo:
 ## Contato
 
 - **WhatsApp:** [(31) 98257-3307](https://wa.me/5531982573307)
-- **Instagram:** [@marceloseletrica](https://instagram.com/marceloseletrica)
+- **Instagram:** [@mseletricaetech](https://instagram.com/mseletricaetech)
 - **Área principal:** Lagoa Santa, MG
 - **Outras áreas:** Vespasiano, Confins e cidades próximas, mediante consulta
 
