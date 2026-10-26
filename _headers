@@ -1,0 +1,7 @@
+# Keep the temporary Pages hostnames out of search results.
+# These rules do not match mseletricaetech.com.br or www.mseletricaetech.com.br.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
