@@ -43,11 +43,11 @@ Os 29 casos HTTP/HTTPS verificados passaram, com um salto, caminho e parâmetros
 - Os 34 CTAs mantêm links, identificação e eventos. GA4 `G-BWRLT4XG1J`, Ads `AW-17634662738` e destino `AW-17634662738/ozZCCO7E2ewcENKy7thB` foram preservados. O SDK Google respondeu `200` e o `page_view` do GA4, `204`. Não foi gerado lead de teste; os envios ao Ads foram bloqueados durante a validação.
 - DNSSEC ativo: novo DS cadastrado no Registro.br; chave 2371, algoritmo 13 e resumo SHA-256 conferidos. Os resolvedores Google e Cloudflare retornaram o DS correspondente e respostas com `AD=true`, sem erro de resolução.
 - Search Console: a tela da propriedade `https://mseletricaetech.com.br/` exibiu proprietário verificado e método **Arquivo HTML** concluído em 28/10. O arquivo `/google9db414ac277743df.html` permanece no projeto; o Pages responde `308` para o mesmo caminho sem `.html`, seguido de `200` com o token preservado. Manter esse arquivo. A tela confirma a situação atual da propriedade, não uma nova verificação forçada do arquivo pelo Google.
+- Sitemap no Search Console: `sitemap.xml` com status **Processado**, última leitura em 28/10/2026 e seis páginas encontradas. Páginas encontradas no sitemap não comprovam indexação.
 
 ## Pendências
 
-1. **Sitemap no Search Console:** conferir a situação e a última leitura na propriedade existente. O arquivo público foi validado e mantém as URLs oficiais; não reenviar nem criar outra propriedade sem necessidade.
-2. **Google Ads:** o recebimento efetivo da conversão pela conta ainda não foi confirmado. A conferência dos eventos no navegador não comprova recebimento de um lead nem envio de mensagem no WhatsApp. Não disparar conversões artificiais para encerrar essa pendência.
+**Google Ads:** o recebimento efetivo da conversão pela conta ainda não foi confirmado. A conferência dos eventos no navegador não comprova recebimento de um lead nem envio de mensagem no WhatsApp. Não disparar conversões artificiais para encerrar essa pendência.
 
 ## Diagnóstico de deploy
 
