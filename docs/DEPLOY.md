@@ -41,12 +41,13 @@ Os 29 casos HTTP/HTTPS verificados passaram, com um salto, caminho e parâmetros
 - Seis páginas (`/`, `/wallbox/`, `/iluminacao/`, `/automacao/`, `/cftv/`, `/contato/`), 20 arquivos/recursos e fontes conferidos. Conteúdo, URLs, canonical, metadados, JSON-LD, `robots.txt` e sitemap preservados.
 - O `noindex` de `_headers` aplica-se somente aos hosts `pages.dev`; o domínio oficial permanece sem esse bloqueio. `404.html` evita o fallback de SPA para endereços inexistentes.
 - Os 34 CTAs mantêm links, identificação e eventos. GA4 `G-BWRLT4XG1J`, Ads `AW-17634662738` e destino `AW-17634662738/ozZCCO7E2ewcENKy7thB` foram preservados. O SDK Google respondeu `200` e o `page_view` do GA4, `204`. Não foi gerado lead de teste; os envios ao Ads foram bloqueados durante a validação.
+- DNSSEC ativo: novo DS cadastrado no Registro.br; chave 2371, algoritmo 13 e resumo SHA-256 conferidos. Os resolvedores Google e Cloudflare retornaram o DS correspondente e respostas com `AD=true`, sem erro de resolução.
+- Search Console: a tela da propriedade `https://mseletricaetech.com.br/` exibiu proprietário verificado e método **Arquivo HTML** concluído em 28/10. O arquivo `/google9db414ac277743df.html` permanece no projeto; o Pages responde `308` para o mesmo caminho sem `.html`, seguido de `200` com o token preservado. Manter esse arquivo. A tela confirma a situação atual da propriedade, não uma nova verificação forçada do arquivo pelo Google.
 
 ## Pendências
 
-1. **DNSSEC pendente (`pending`):** habilitado na Cloudflare e novo DS cadastrado no Registro.br em 28/10; aguarda publicação e validação pública. Comparar o DS publicado com os valores atuais fornecidos pela Cloudflare e confirmar a ativação. Não reutilizar o DS antigo nem preencher valores presumidos.
-2. **Search Console:** `/google9db414ac277743df.html` responde `308` para o mesmo caminho sem `.html`, no mesmo host HTTPS; o destino responde `200` com o token preservado. A documentação Google contém orientações contraditórias sobre redirecionamentos de arquivos de verificação. Consultar **Configurações → Verificação de propriedade**, métodos ativos e situação da conta antes de afirmar preservação ou perda do acesso.
-3. **Google Ads:** o recebimento efetivo da conversão pela conta ainda não foi confirmado. A conferência dos eventos no navegador não comprova recebimento de um lead nem envio de mensagem no WhatsApp. Não disparar conversões artificiais para encerrar essa pendência.
+1. **Sitemap no Search Console:** conferir a situação e a última leitura na propriedade existente. O arquivo público foi validado e mantém as URLs oficiais; não reenviar nem criar outra propriedade sem necessidade.
+2. **Google Ads:** o recebimento efetivo da conversão pela conta ainda não foi confirmado. A conferência dos eventos no navegador não comprova recebimento de um lead nem envio de mensagem no WhatsApp. Não disparar conversões artificiais para encerrar essa pendência.
 
 ## Diagnóstico de deploy
 
