@@ -1,3 +1,5 @@
+import { notifyWallboxLead } from './wallbox-leads/notify.js';
+
 const JSON_HEADERS = { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' };
 const MAX_BODY = 8192;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
@@ -132,7 +134,16 @@ export async function onRequestPost(context) {
       return reply(200, { ok: true, lead_id: existing.id, duplicate: true });
     }
     const created = await env.WALLBOX_LEADS_DB.prepare('INSERT INTO wallbox_leads (id, created_at, name, whatsapp, vehicle, property, distance, source_page, referrer_origin, utm_json, click_ids_json, payload_hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING RETURNING id').bind(input.submissionId, new Date().toISOString(), input.name, input.phone, input.vehicle || null, input.property || null, input.distance || null, input.page, input.referrer || null, JSON.stringify(input.utm), JSON.stringify(input.clickIds), fingerprint).first();
-    if (created) return reply(201, { ok: true, lead_id: created.id, duplicate: false });
+    if (created) {
+      // Salvar o lead é a prioridade; alertas nunca devem impedir a confirmação.
+      // Não enviar em repetições do mesmo UUID e não registrar PII nos logs.
+      if (env.RESEND_API_KEY && env.WALLBOX_ALERT_EMAIL && context.waitUntil) {
+        context.waitUntil(notifyWallboxLead(env, input).catch(() => {
+          console.error('wallbox_notification_failed');
+        }));
+      }
+      return reply(201, { ok: true, lead_id: created.id, duplicate: false });
+    }
     const afterRace = await env.WALLBOX_LEADS_DB.prepare('SELECT id, payload_hash FROM wallbox_leads WHERE id = ?').bind(input.submissionId).first();
     if (afterRace?.payload_hash === fingerprint) return reply(200, { ok: true, lead_id: afterRace.id, duplicate: true });
     return reply(409, { ok: false, error: 'duplicate_conflict' });
