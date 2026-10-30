@@ -33,8 +33,15 @@ O identificador da solicitação evita registros duplicados; ele não garante qu
 
 ## Notificação
 
-A implantação básica não envia notificação por e-mail. Consultar o D1 enquanto uma solução de aviso não estiver configurada e testada. A ativação do serviço de envio da Cloudflare pode exigir verificação do destino, configuração do domínio remetente e alterações DNS, que devem ser avaliadas antes de serem executadas.
+O formulário envia **opcionalmente** um aviso de novo pedido por Resend somente após confirmar a inserção no D1. O remetente é `avisos@avisos.mseletricaetech.com.br` (domínio já verificado no Resend). Configure **na Cloudflare Pages > projeto ms-eletrica > Settings > Variables and Secrets**, no ambiente de produção:
+
+- `RESEND_API_KEY` — Secret (nunca colocar no GitHub nem em logs); criar no Resend com **Sending access** restrito ao domínio `avisos.mseletricaetech.com.br`.
+- `WALLBOX_ALERT_EMAIL` — variável simples com o endereço que receberá as notificações.
+
+Depois, faça **novo deploy**, pois as alterações de variáveis exigem republicação. Em preview, **não** compartilhe a chave de produção: use chave e destinatário de teste separados ou deixe o envio desabilitado. Não compartilhe dados pessoais de clientes em logs. As notificações são disparadas via `context.waitUntil()` apenas para novas inserções (nunca em solicitações repetidas). O Resend recebe uma `Idempotency-Key` por pedido.
+
+O cliente recebe confirmação somente após o banco salvar os dados, independentemente do resultado do Resend. Falhas no e-mail geram apenas o log genérico `wallbox_notification_failed` (sem dados do cliente). **Não há reenvio automático em caso de falha**: verificar a aba Logs do Resend e o D1 para pedidos que possam não ter sido avisados. Não considerar alerta ativo até executar um envio real em produção e recebê-lo na caixa de entrada.
 
 ## Testes locais
 
-`node --test tests/wallbox-leads.test.mjs` usa SQLite em memória e simula o serviço de verificação; não envia contatos nem conversões para produção. Após configurar a infraestrutura, validar com banco e ambiente de prévia isolados, e confirmar separadamente o comportamento real do Google Ads.
+`node --test tests/wallbox-leads.test.mjs tests/wallbox-notify.test.mjs` usa SQLite em memória e simula o serviço de verificação; não envia contatos nem conversões para produção. Após configurar a infraestrutura, validar com banco e ambiente de prévia isolados, e confirmar separadamente o comportamento real do Google Ads.
