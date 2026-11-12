@@ -16,6 +16,7 @@ export async function notifyWallboxLead(env, lead) {
     '',
     'Nome: ' + lead.name,
     'WhatsApp: ' + lead.phone,
+    'Cidade: ' + (lead.city || 'Não informada'),
     'Veículo: ' + (lead.vehicle || 'Não informado'),
     'Imóvel: ' + (PROPERTIES[lead.property] || 'Não informado'),
     'Distância: ' + (DISTANCES[lead.distance] || 'Não informado'),

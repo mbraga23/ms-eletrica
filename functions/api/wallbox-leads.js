@@ -46,6 +46,10 @@ function parseInput(body, origin) {
   if (!UUID.test(submissionId)) throw new Error('invalid');
   const name = text(body.name, 100, true);
   if (name.length < 2) throw new Error('invalid');
+  // Pedidos enviados por páginas abertas antes da atualização não têm este campo.
+  // A nova interface exige cidade; a ausência da chave mantém sessões antigas válidas.
+  const city = Object.hasOwn(body, 'city') ? text(body.city, 100, true) : '';
+  if (Object.hasOwn(body, 'city') && city.length < 2) throw new Error('invalid');
   const phoneRaw = text(body.phone, 30, true);
   if (!/^[\d ()+\-]+$/.test(phoneRaw)) throw new Error('invalid');
   let phone = phoneRaw.replace(/\D/g, '');
@@ -65,7 +69,7 @@ function parseInput(body, origin) {
   const utm = attribution(body.utm, UTM_KEYS, 120);
   const clickIds = attribution(body.click_ids, CLICK_KEYS, 512);
   const token = text(body.turnstile_token, 2048, true);
-  return { submissionId, name, phone, vehicle, property, distance, page: page.origin + page.pathname, referrer, utm, clickIds, token };
+  return { submissionId, name, city, phone, vehicle, property, distance, page: page.origin + page.pathname, referrer, utm, clickIds, token };
 }
 
 async function hmac(secret, value) {
@@ -124,7 +128,10 @@ export async function onRequestPost(context) {
     if (raw === null) return reply(413, { ok: false, error: 'invalid' });
     let input;
     try { input = parseInput(JSON.parse(raw), url.origin); } catch { return reply(400, { ok: false, error: 'invalid' }); }
-    const payload = JSON.stringify([input.name, input.phone, input.vehicle, input.property, input.distance, input.page, input.referrer, input.utm, input.clickIds]);
+    const values = [input.name, input.phone, input.vehicle, input.property, input.distance, input.page, input.referrer, input.utm, input.clickIds];
+    // Preserva o hash de solicitações feitas antes de existir o campo cidade.
+    if (input.city) values.push(input.city);
+    const payload = JSON.stringify(values);
     const fingerprint = await hmac(env.RATE_LIMIT_SECRET, `wallbox-lead:${payload}`);
     // Verify each attempt, including retries: a previously consumed Turnstile
     // token must never be accepted simply because the lead already exists.
@@ -134,7 +141,7 @@ export async function onRequestPost(context) {
       if (existing.payload_hash !== fingerprint) return reply(409, { ok: false, error: 'duplicate_conflict' });
       return reply(200, { ok: true, lead_id: existing.id, duplicate: true });
     }
-    const created = await env.WALLBOX_LEADS_DB.prepare('INSERT INTO wallbox_leads (id, created_at, name, whatsapp, vehicle, property, distance, source_page, referrer_origin, utm_json, click_ids_json, payload_hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING RETURNING id').bind(input.submissionId, new Date().toISOString(), input.name, input.phone, input.vehicle || null, input.property || null, input.distance || null, input.page, input.referrer || null, JSON.stringify(input.utm), JSON.stringify(input.clickIds), fingerprint).first();
+    const created = await env.WALLBOX_LEADS_DB.prepare('INSERT INTO wallbox_leads (id, created_at, name, whatsapp, vehicle, property, distance, source_page, referrer_origin, utm_json, click_ids_json, payload_hash, city) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING RETURNING id').bind(input.submissionId, new Date().toISOString(), input.name, input.phone, input.vehicle || null, input.property || null, input.distance || null, input.page, input.referrer || null, JSON.stringify(input.utm), JSON.stringify(input.clickIds), fingerprint, input.city || null).first();
     if (created) {
       // Salvar o lead é a prioridade; alertas nunca devem impedir a confirmação.
       // Não enviar em repetições do mesmo UUID e não registrar PII nos logs.

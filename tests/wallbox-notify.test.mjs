@@ -6,7 +6,7 @@ const originalFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = originalFetch; });
 const lead = {
   submissionId: 'c497dfc9-54a7-471a-b817-f92f6f19db8c',
-  name: 'Pessoa Teste', phone: '31987654321',
+  name: 'Pessoa Teste', phone: '31987654321', city: 'Lagoa Santa',
   vehicle: 'BYD', property: 'casa', distance: 'ate_5m',
   page: 'https://mseletricaetech.com.br/wallbox/',
   utm: { utm_source: 'google', utm_campaign: 'wallbox' }
@@ -25,6 +25,7 @@ test('avisa o proprietário somente com os dados necessários', async () => {
     assert.deepEqual(payload.to, ['test@example.com']);
     assert.match(payload.from, /avisos@avisos\.mseletricaetech\.com\.br/);
     assert.match(payload.text, /Pessoa Teste/);
+    assert.match(payload.text, /Cidade: Lagoa Santa/);
     assert.match(payload.text, /https:\/\/wa\.me\/5531987654321/);
     assert.match(payload.text, /google/);
     return new Response(null, { status: 200 });
