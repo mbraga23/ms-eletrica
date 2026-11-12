@@ -1,4 +1,5 @@
 import { notifyWallboxLead } from './wallbox-leads/notify.js';
+import { notifyWallboxTelegram } from './wallbox-leads/telegram.js';
 
 const JSON_HEADERS = { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' };
 const MAX_BODY = 8192;
@@ -140,6 +141,11 @@ export async function onRequestPost(context) {
       if (env.RESEND_API_KEY && env.WALLBOX_ALERT_EMAIL && context.waitUntil) {
         context.waitUntil(notifyWallboxLead(env, input).catch(() => {
           console.error('wallbox_notification_failed');
+        }));
+      }
+      if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID && context.waitUntil) {
+        context.waitUntil(notifyWallboxTelegram(env).catch(() => {
+          console.error('wallbox_telegram_notification_failed');
         }));
       }
       return reply(201, { ok: true, lead_id: created.id, duplicate: false });
