@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS wallbox_leads (
   created_at TEXT NOT NULL,
   name TEXT NOT NULL,
   whatsapp TEXT NOT NULL,
+  city TEXT,
   vehicle TEXT,
   property TEXT CHECK(property IS NULL OR property IN ('casa', 'apartamento')),
   distance TEXT CHECK(distance IS NULL OR distance IN ('ate_5m', '5_a_10m', '10_a_20m', 'mais_20m', 'nao_sei')),

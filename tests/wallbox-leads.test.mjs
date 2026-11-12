@@ -7,7 +7,7 @@ import { onRequestGet } from '../functions/api/wallbox-leads/config.js';
 
 let db, env, previousFetch, verdict;
 const origin = 'https://mseletricaetech.com.br';
-const sample = () => ({ submission_id: crypto.randomUUID(), name: 'Pessoa Teste', phone: '(31) 98257-3307', vehicle: 'BYD', property: 'casa', distance: 'nao_sei', page: `${origin}/wallbox/`, referrer_origin: 'https://www.google.com', utm: { utm_source: 'google', utm_campaign: 'wallbox' }, click_ids: { gclid: 'test-click-id' }, turnstile_token: 'test-token' });
+const sample = () => ({ submission_id: crypto.randomUUID(), name: 'Pessoa Teste', city: '  Lagoa   Santa  ', phone: '(31) 98257-3307', vehicle: 'BYD', property: 'casa', distance: 'nao_sei', page: `${origin}/wallbox/`, referrer_origin: 'https://www.google.com', utm: { utm_source: 'google', utm_campaign: 'wallbox' }, click_ids: { gclid: 'test-click-id' }, turnstile_token: 'test-token' });
 function wrap(sqlite) {
   return { prepare(sql) { let values; return { bind(...args) { values = args; return this; }, async first() { return sqlite.prepare(sql).get(...values) || null; }, async run() { return sqlite.prepare(sql).run(...values); } }; } };
 }
@@ -31,7 +31,7 @@ test('registra exatamente um lead e normaliza dados', async () => {
   const item=sample(); const r=await send(item);
   assert.equal(r.status,201); assert.equal(r.body.duplicate,false); assert.equal(r.body.lead_id,item.submission_id);
   const row=db.prepare('SELECT * FROM wallbox_leads').get();
-  assert.equal(row.whatsapp,'31982573307'); assert.equal(row.vehicle,'BYD'); assert.equal(row.referrer_origin,'https://www.google.com');
+  assert.equal(row.whatsapp,'31982573307'); assert.equal(row.city,'Lagoa Santa'); assert.equal(row.vehicle,'BYD'); assert.equal(row.referrer_origin,'https://www.google.com');
   assert.deepEqual(JSON.parse(row.utm_json), item.utm); assert.deepEqual(JSON.parse(row.click_ids_json), item.click_ids);
   assert.equal(r.headers.get('cache-control'),'no-store');
 });
@@ -39,6 +39,7 @@ test('repetição segura e conflito de mesmo identificador', async () => {
   const item=sample(); assert.equal((await send(item)).status,201);
   assert.equal((await send(item)).body.duplicate,true);
   assert.equal((await send({...item,name:'Outro nome'})).status,409);
+  assert.equal((await send({...item,city:'Vespasiano'})).status,409);
   assert.equal(db.prepare('SELECT count(*) AS n FROM wallbox_leads').get().n,1);
 });
 test('um token já usado é rejeitado; token novo retoma o mesmo lead', async () => {
@@ -63,8 +64,35 @@ test('requisições concorrentes com mesmo UUID não duplicam registro', async (
   assert.equal(db.prepare('SELECT count(*) AS n FROM wallbox_leads').get().n,1);
 });
 test('envios inválidos ou com possíveis dados pessoais na origem não são gravados', async () => {
-  for(const item of [{...sample(),name:''},{...sample(),phone:'1234'},{...sample(),property:'empresa'},{...sample(),page:`${origin}/wallbox/?nome=Maria`},{...sample(),referrer_origin:'https://example.com/path'}]) assert.equal((await send(item)).status,400);
+  for(const item of [{...sample(),name:''},{...sample(),city:''},{...sample(),city:'   '},{...sample(),city:'A'},{...sample(),city:'A'.repeat(101)},{...sample(),phone:'1234'},{...sample(),property:'empresa'},{...sample(),page:`${origin}/wallbox/?nome=Maria`},{...sample(),referrer_origin:'https://example.com/path'}]) assert.equal((await send(item)).status,400);
   assert.equal(db.prepare('SELECT count(*) AS n FROM wallbox_leads').get().n,0);
+});
+
+test('formulário antigo sem cidade continua válido e preserva o hash anterior', async () => {
+  const item=sample(); delete item.city;
+  const oldValues=[item.name, '31982573307', item.vehicle, item.property, item.distance, item.page, item.referrer_origin, item.utm, item.click_ids];
+  const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(env.RATE_LIMIT_SECRET),{name:'HMAC',hash:'SHA-256'},false,['sign']);
+  const digest=await crypto.subtle.sign('HMAC',key,new TextEncoder().encode('wallbox-lead:'+JSON.stringify(oldValues)));
+  const oldHash=Array.from(new Uint8Array(digest), b=>b.toString(16).padStart(2,'0')).join('');
+  db.prepare('INSERT INTO wallbox_leads (id,created_at,name,whatsapp,source_page,utm_json,click_ids_json,payload_hash) VALUES (?,?,?,?,?,?,?,?)').run(item.submission_id,new Date().toISOString(),item.name,'31982573307',item.page,'{}','{}',oldHash);
+  const result=await send(item);
+  assert.equal(result.status,200); assert.equal(result.body.duplicate,true);
+  assert.equal(db.prepare('SELECT city FROM wallbox_leads').get().city,null);
+  const fresh=sample(); delete fresh.city;
+  assert.equal((await send(fresh)).status,201);
+  assert.equal(db.prepare('SELECT city FROM wallbox_leads WHERE id=?').get(fresh.submission_id).city,null);
+});
+
+test('migração adiciona cidade sem alterar registros existentes', () => {
+  const oldDb=new DatabaseSync(':memory:');
+  try {
+    const schema=readFileSync(new URL('../db/wallbox-leads.sql',import.meta.url),'utf8').replace(/^  city TEXT,\r?\n/m,'');
+    oldDb.exec(schema);
+    oldDb.prepare('INSERT INTO wallbox_leads (id,created_at,name,whatsapp,source_page,utm_json,click_ids_json,payload_hash) VALUES (?,?,?,?,?,?,?,?)').run('anterior','2026-01-01','Anterior','31999999999',origin+'/wallbox/','{}','{}','hash');
+    oldDb.exec(readFileSync(new URL('../db/migrations/001_wallbox_city.sql',import.meta.url),'utf8'));
+    const row=oldDb.prepare('SELECT id, name, city FROM wallbox_leads').get();
+    assert.equal(row.id,'anterior'); assert.equal(row.name,'Anterior'); assert.equal(row.city,null);
+  } finally { oldDb.close(); }
 });
 test('atribuição suspeita é descartada sem impedir contato válido', async () => {
   assert.equal((await send({...sample(),utm:{utm_term:'email@example.com',utm_source:'google'}})).status,201);

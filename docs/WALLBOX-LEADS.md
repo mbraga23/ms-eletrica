@@ -5,6 +5,7 @@ O formulário envia dados a uma Pages Function; a resposta de sucesso só é env
 ## Configuração obrigatória
 
 - Criar banco D1 e aplicar `db/wallbox-leads.sql` no banco correto. Vinculá-lo ao projeto Pages como `WALLBOX_LEADS_DB`.
+- Em bancos anteriores ao campo de cidade, verificar a estrutura e aplicar uma vez `db/migrations/001_wallbox_city.sql` antes do novo deploy. Bancos já criados com o esquema atualizado não precisam da migração. Pedidos antigos mantêm a cidade vazia.
 - Usar banco de teste separado e bindings de preview separados dos de produção. Nunca permitir que um deploy de teste escreva contatos no banco de produção.
 - Configurar Turnstile para os domínios autorizados; a função exige resposta válida do Siteverify, hostname correspondente e action `wallbox_lead`.
 - Configurar as variáveis de ambiente `TURNSTILE_SITE_KEY` (pública), `TURNSTILE_SECRET_KEY` (secreta) e `RATE_LIMIT_SECRET` (secreta, gerada aleatoriamente com pelo menos 32 bytes de entropia). Não registrar esses segredos no GitHub, em logs ou em capturas de tela.
@@ -16,7 +17,7 @@ O formulário envia dados a uma Pages Function; a resposta de sucesso só é env
 Na conta Cloudflare autorizada: **Computação → D1 → banco dos leads → Console**. Use a consulta abaixo para ver os 50 pedidos mais recentes. Os campos de origem e identificadores de anúncios são opcionais. Restrinja a conta Cloudflare a pessoas autorizadas.
 
 ```sql
-SELECT created_at, name, whatsapp, vehicle, property, distance, source_page,
+SELECT created_at, name, whatsapp, city, vehicle, property, distance, source_page,
        referrer_origin, utm_json, click_ids_json
 FROM wallbox_leads
 ORDER BY created_at DESC
