@@ -14,7 +14,7 @@ function wrap(sqlite) {
 async function send(data, opts={}) {
   const headers = { origin, 'content-type': 'application/json', 'cf-connecting-ip': opts.ip || '203.0.113.42', ...opts.headers };
   const request = new Request(`${origin}/api/wallbox-leads`, { method: 'POST', headers, body: typeof data === 'string' ? data : JSON.stringify(data) });
-  const response = await onRequestPost({ request, env, waitUntil() {} });
+  const response = await onRequestPost({ request, env, waitUntil: opts.waitUntil || (() => {}) });
   return { status: response.status, body: await response.json(), headers: response.headers };
 }
 beforeEach(() => {
@@ -90,3 +90,32 @@ test('rejeita payload acima do limite sem salvar dados', async () => {
   assert.equal((await send({...sample(), vehicle:'x'.repeat(10000)})).status,413);
   assert.equal(db.prepare('SELECT count(*) AS n FROM wallbox_leads').get().n,0);
 });
+
+for (const failedService of ['telegram', 'resend']) {
+  test(`salva antes de notificar e mantém os canais independentes quando ${failedService} falha`, async () => {
+    Object.assign(env, { RESEND_API_KEY: 'dummy', WALLBOX_ALERT_EMAIL: 'test@example.com', TELEGRAM_BOT_TOKEN: 'dummy-token', TELEGRAM_CHAT_ID: '12345' });
+    const calls = [];
+    const pending = [];
+    const previousError = console.error;
+    console.error = () => {};
+    try {
+      globalThis.fetch = async (url) => {
+        if (url === 'https://challenges.cloudflare.com/turnstile/v0/siteverify') return Response.json(verdict);
+        assert.equal(db.prepare('SELECT count(*) AS n FROM wallbox_leads').get().n, 1, 'o pedido deve ser salvo antes do alerta');
+        const service = url === 'https://api.resend.com/emails' ? 'resend' : 'telegram';
+        calls.push(service);
+        if (service === failedService) throw new Error('indisponível');
+        return Response.json({ ok: true });
+      };
+      const item = sample();
+      const options = { waitUntil: promise => pending.push(promise) };
+      assert.equal((await send(item, options)).status, 201);
+      await Promise.all(pending);
+      assert.deepEqual(calls.sort(), ['resend', 'telegram']);
+      assert.equal((await send(item, options)).body.duplicate, true);
+      await Promise.all(pending);
+      assert.deepEqual(calls.sort(), ['resend', 'telegram'], 'repetição não deve reenviar alertas');
+      assert.equal(db.prepare('SELECT count(*) AS n FROM wallbox_leads').get().n, 1);
+    } finally { console.error = previousError; }
+  });
+}
